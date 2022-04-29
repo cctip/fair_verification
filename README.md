@@ -1,14 +1,14 @@
 ### single 
-1.  ss                      full name： server seed
-2.  ssh                     full name： server seed hash
-3.  cs                      full name： client seed
-4.  uid                     full name： user id
-5.  wo                      full name： winning odds
+1.  ss                      full name： ServerSeed
+2.  ssh                     full name： ServerSeed hash
+3.  cs                      full name： ClientSeed
+4.  uid                     full name： PID
+5.  wo                      full name： Chance of Winning
 
 ### group
-1.  ss                      full name： server seed
-2.  ssh                     full name： server seed hash
-3.  ebh                     full name： eth block hash
-4.  pa                      full name： Participant amount
-5.  wa                      full name： Winner amount
-6.  ypa                     full name： Your participate number
+1.  ss                      full name： ServerSeed
+2.  ssh                     full name： ServerSeed Hash
+3.  ebh                     full name： ClientSeed(Eth Block Hash)
+4.  pa                      full name： Number of Participants
+5.  wa                      full name： Number of Winners
+6.  ypa                     full name： PID
