@@ -137,7 +137,7 @@ const app = new Vue({
 
                 }
             ]
-            const isWin = winningResult(oddsValue / 100, `${clientValue}: ${uidValue}`, serverValue);
+            const isWin = winningResult(oddsValue / 100, `${clientValue}:${uidValue}`, serverValue);
             this.renderView(renderSingleView, isWin);
             return false;
         },

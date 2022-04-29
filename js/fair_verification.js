@@ -95,11 +95,7 @@ function LotteryGroup(
 
 function IntN(min, max) {
   this.seed = new BigNumber(this.a, 10).multipliedBy(this.seed).plus(this.c).mod(this.modulus)
-  // console.log("@@@", max, min)
-  // console.log("toNumber", this.seed.toNumber())
-  // console.log("toFixed", this.seed.toFixed())
-  // console.log(this.seed.toNumber() % (max - min) + min)
-  // console.log("@", this.seed.toFixed, this.seed % (max - min) + min);
+  
   return +this.seed.toNumber() % (max - min) + min;
 }
 
