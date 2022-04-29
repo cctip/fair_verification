@@ -1,0 +1,243 @@
+@import url(./global.css);
+
+#root {
+    min-height: 100vh;
+    width: 100vw;
+    background-color: #1B1C17;
+    padding: 0.32rem 0.24rem;
+    font-size: 0.14rem;
+    overflow: hidden;
+    background-image: url("../assets/images/bg.png");
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+}
+
+.wrap {
+    width: 100%;
+    max-width: 800px;
+}
+
+.header {
+    color: #fff;
+}
+
+.header h1 {
+    font-size: 0.32rem;
+    line-height: 0.4rem;
+    font-family: "Bold";
+}
+
+.header h2 {
+    font-size: 0.32rem;
+    color: #fff;
+    line-height: 0.4rem;
+}
+
+.header div {
+    margin-top: 0.12rem;
+    height: 0.32rem;
+    padding: 0 0.08rem;
+    text-align: center;
+    line-height: 0.32rem;
+    background-color: #BDECE2;
+    color: #39665E;
+    font-family: "DemiBold";
+    font-size: 0.12rem;
+    border-radius: 0.12rem;
+}
+
+
+.content {
+    border: 0.02rem solid #fff;
+    background-color: #fff;
+    border-radius: 0.24rem;
+    overflow: hidden;
+    margin-bottom: 0.32rem;
+    margin-top: 0.32rem;
+}
+
+.view-box {
+    background-color: #16401F;
+    min-height: 0.64rem;
+    border-radius: 0.24rem 0.24rem 0 0;
+    padding: 0.24rem;
+    color: #55DA26;
+}
+
+.view-box i {
+    animation: flicker 1.5s ease-out infinite;
+}
+
+.view-box h2 {
+    font-family: "DemiBold";
+    font-size: 0.14rem;
+    line-height: 0.16rem;
+    margin-bottom: 0.16rem;
+}
+
+.view-box h2 span.red {
+    color: red;
+    vertical-align: middle;
+}
+
+
+
+.view-box p {
+    font-size: 0.14rem;
+    line-height: 0.16rem;
+    margin-bottom: 0.16rem;
+    font-family: "Light";
+    line-break: anywhere;
+    letter-spacing: 0.4px;
+}
+
+.view-box .line {
+    height: 0;
+    border: 0 dashed #55DA26;
+    border-top-width: 0.01rem;
+    margin-bottom: 0.16rem;
+}
+
+@keyframes flicker {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.from-box {
+    padding: 0.32rem 0.24rem 0.24rem;
+}
+
+.from-box h1 {
+    font-family: "DemiBold";
+    align-self: flex-start;
+    margin-bottom: 0.32rem;
+}
+
+.from-item {
+    width: 100%;
+    margin-bottom: 0.24rem;
+}
+
+.content-box {
+    width: 100%;
+    position: relative;
+}
+
+.content-box:last-of-type {
+    margin-bottom: 0;
+}
+
+.content-box label {
+    align-self: flex-start;
+    font-size: 0.14rem;
+    line-height: 0.2rem;
+}
+
+.content-box label span {
+    font-size: 0.14rem;
+    line-height: 0.2rem;
+    margin-left: 0.04rem;
+    color: rgba(25, 23, 24, 0.5);
+}
+
+.content-box input {
+    width: 100%;
+    background-color: #F9F9FD;
+    border-radius: 0.08rem;
+    height: 0.44rem;
+    margin-bottom: 0.04rem;
+    padding: 0 0.12rem;
+    font-size: 0.14rem;
+}
+
+.content-box .input-box {
+    width: 100%;
+    position: relative;
+}
+
+.content-box .input-box.odds::after {
+    content: "%";
+    position: absolute;
+    right: 0.22rem;
+    font-size: 0.14rem;
+    height: 0.2rem;
+    width: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(25, 23, 24, 0.5);
+}
+
+.from-box button {
+    margin-top: 0.32rem;
+    background-color: #D9ED81;
+    height: 0.56rem;
+    width: 1.42rem;
+    border-radius: 0.3rem;
+    color: #191718;
+    font-family: "DemiBold";
+    font-size: 0.16rem;
+    transition: all 0.5s ease-out;
+    cursor: pointer;
+}
+
+.from-box button:active {
+    transform: scale(0.9);
+}
+
+
+.footer {
+    color: #fff;
+}
+
+.footer p {
+    font-size: 0.12rem;
+    margin-bottom: 0.12rem;
+    line-height: 0.16rem;
+    letter-spacing: 0.4px;
+}
+
+.footer .github-box {
+    display: flex;
+    align-items: center;
+}
+
+.footer img {
+    height: 0.32rem;
+    object-fit: cover;
+}
+
+
+.wrong-box {
+    display: flex;
+    align-items: center;
+    min-height: 0.24rem;
+    background-color: #FFDAD4;
+    border-radius: 0.12rem;
+    border: 1px solid #ba1b1b;
+    padding: 0.04rem 0.08rem;
+    margin-top: 0.04rem;
+}
+
+.wrong-box img {
+    height: 0.15rem;
+    width: 0.15rem;
+    margin-right: 0.08rem;
+}
+
+.wrong-box .wrong-text {
+    color: #410001;
+    font-size: 0.14rem;
+    line-height: 0.16rem;
+}

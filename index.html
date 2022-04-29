@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width"
+        name="viewport">
+    <title>Provably Fair</title>
+    <link rel="stylesheet" href="./styles/index.css">
+    <script src="./js/crypto-js/crypto-js.js" async></script>
+    <script src="./js/bignumber.js"></script>
+    <script src="./js/decimal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+    <script src="./js/fair_verification.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <div class="wrap">
+            <div class="header flex-middle">
+                <h1>Provably Fair</h1>
+                <h2>giveaway verification</h2>
+                <div v-if="!lotteryType">BLOCKCHIAN BASED</div>
+            </div>
+            <div class="content">
+                <div class="view-box">
+                    <h2 v-show="!generate" style="margin-bottom: 0;">> Waiting for input <i>_</i></h2>
+                    <div v-show="generate" id="view"></div>
+                </div>
+                <!-- single -->
+                <form class="from-box flex-middle" v-if="lotteryType">
+                    <div class="from-item">
+                        <div class="content-box flex-middle">
+                            <label for="server">ServerSeed</label>
+                            <input id="server" type="text" v-model:value="serverValue" v-on:blur="" class="form-control"
+                                placeholder="Input serverseed" />
+                        </div>
+                        <v-warning v-show="isShowWarning&&!serverValue" text="Please enter a server seed">
+                        </v-warning>
+                    </div>
+                    <div class="from-item">
+                        <div class="content-box flex-middle">
+                            <label for="client">ClientSeed</label>
+                            <input id="client" type="text" v-model:value="clientValue" class="form-control"
+                                placeholder="Input clientseed">
+                        </div>
+                        <v-warning v-show="isShowWarning&&!clientValue" text="Please enter a client seed">
+                        </v-warning>
+                    </div>
+                    <div class="from-item">
+                        <div class="content-box flex-middle">
+                            <label for="uid">PID</label>
+                            <input id="uid" type="text" v-model:value="uidValue" class="form-control"
+                                placeholder="Input PID">
+                        </div>
+                        <v-warning v-show="isShowWarning&&!uidValue" text="Please enter a PID">
+                        </v-warning>
+                    </div>
+                    <div class="from-item">
+                        <div class="content-box flex-middle">
+                            <label for="server">Chance of Winning<span>(Setup by the giveaway sponsor)</span></label>
+                            <div class="input-box odds">
+                                <input id="server" type="number" v-model:value="oddsValue" class="form-control"
+                                    placeholder="Input chance of winning">
+                            </div>
+                        </div>
+                        <v-warning v-show="isShowWarning&&(oddsValue<=0||oddsValue>100)"
+                            text="Please enter a number >= 0.01%">
+                        </v-warning>
+                    </div>
+                    <button type="button" v-on:click="singleVerify">Verify</button>
+                </form>
+                <!-- group -->
+                <form class="from-box flex-middle" v-else>
+                    <h1>Input</h1>
+                    <div class="from-item">
+                        <div class="content-box flex-middle">
+                            <label for="server">ServerSeed</label>
+                            <input id="server" type="text" v-model:value="serverValue" class="form-control"
+                                placeholder="Input serverseed" />
+                        </div>
+                        <v-warning v-show="isShowWarning&&!serverValue" text="Please enter server seed">
+                        </v-warning>
+                    </div>
+                    <div class="from-item">
+                        <div class="content-box flex-middle">
+                            <label for="server">ClientSeed(ETH block hash)</label>
+                            <input id="server" type="text" v-model:value="ethHashValue" class="form-control"
+                                placeholder="Input clientseed">
+                        </div>
+                        <v-warning v-show="isShowWarning&&!ethHashValue" text="Please enter ETH block hash">
+                        </v-warning>
+                    </div>
+                    <div class="from-item">
+                        <div class="content-box flex-middle">
+                            <label for="server">Number of Participants</label>
+                            <input id="server" type="number" v-model:value="participantValue" class="form-control"
+                                placeholder="Input number of participants">
+                        </div>
+                        <v-warning v-show="isShowWarning&&participantValue<=0"
+                            text="Please enter the number of participants">
+                        </v-warning>
+                    </div>
+                    <div class="from-item">
+                        <div class="content-box flex-middle">
+                            <label for="server">Number of Winners</label>
+                            <input id="server" type="number" v-model:value="winnerValue" class="form-control"
+                                placeholder="Input number of winners">
+                        </div>
+                        <v-warning v-show="isShowWarning&&winnerValue<=0" text="Please enter the number of winners">
+                        </v-warning>
+                    </div>
+                    <div class="from-item">
+                        <div class="content-box flex-middle">
+                            <label for="server">PID</label>
+                            <input id="server" type="number" v-model:value="myParticipantValue" class="form-control"
+                                placeholder="Input PID">
+                        </div>
+                        <v-warning v-show="isShowWarning&&myParticipantValue<0"
+                            text="Please enter your participation number">
+                        </v-warning>
+                    </div>
+                    <button type="button" v-on:click="groupVerify">Verify</button>
+                </form>
+            </div>
+            <div class="footer flex-middle">
+                <p>Open source & Custodial on</p>
+                <a href="https://github.com/cctip/fair_verification" target="_blank">
+                    <img src="./assets/images/github.png" alt="github">
+                </a>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script src="./index.js"></script>
+
+</html>

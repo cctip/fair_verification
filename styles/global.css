@@ -1,0 +1,53 @@
+@font-face {
+    font-family: "Bold";
+    src: url("../assets//fonts/TTFirsNeue-Bold.ttf");
+}
+
+@font-face {
+    font-family: "DemiBold";
+    src: url("../assets//fonts/TTFirsNeue-DemiBold.ttf");
+}
+
+@font-face {
+    font-family: "Medium";
+    src: url("../assets//fonts/TTFirsNeue-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Light";
+    src: url("../assets//fonts/TTFirsNeue-Light.ttf");
+}
+
+@font-face {
+    font-family: "Regular";
+    src: url("../assets//fonts/TTFirsNeue-Regular.ttf");
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    outline: none;
+    list-style: none;
+    text-decoration: none;
+    font-family: "Regular";
+    font-weight: 400;
+    border: none;
+}
+
+
+html {
+    font-size: calc(100vw / 428 * 100);
+}
+
+@media screen and (min-width:1000px) {
+    html {
+        font-size: 100px;
+    }
+}
+
+.flex-middle {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
