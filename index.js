@@ -235,7 +235,7 @@ const app = new Vue({
                 params[key] = value;
             })
 
-            if (params.uid != "" && params.wo != "") {
+            if (params.uid != "" || params.wo != "") {
                 this.lotteryType = true;
             }
 
