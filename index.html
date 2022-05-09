@@ -116,7 +116,7 @@
                             <input id="server" type="number" v-model:value="myParticipantValue" class="form-control"
                                 placeholder="Input PID">
                         </div>
-                        <v-warning v-show="isShowWarning&&myParticipantValue<0"
+                        <v-warning v-show="isShowWarning&&(myParticipantValue<0||myParticipantValue=='')"
                             text="Please enter your participation number">
                         </v-warning>
                     </div>
