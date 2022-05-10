@@ -36,13 +36,13 @@ const app = new Vue({
                 serverSeedHash,
                 myParticipantValue
             } = this;
-            console.log(typeof myParticipantValue != "number");
+
             if (!serverValue ||
                 !ethHashValue ||
                 participantValue <= 0 ||
                 winnerValue <= 0 ||
                 myParticipantValue < 0 ||
-                myParticipantValue == ""
+                myParticipantValue === ""
             ) {
                 this.isShowWarning = true;
                 return false
