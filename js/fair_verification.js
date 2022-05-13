@@ -95,7 +95,7 @@ function LotteryGroup(
 
 function IntN(min, max) {
   this.seed = new BigNumber(this.a, 10).multipliedBy(this.seed).plus(this.c).mod(this.modulus)
-  
+
   return +this.seed.toNumber() % (max - min) + min;
 }
 
@@ -114,7 +114,7 @@ LCG.prototype = {
 
 function CalculateWinnersV2(hash, min, max, num) {
   let res = [];
-  if (max < num) {
+  if (max + 1 < num) {
     for (let i = min; i < max; i++) {
       res.push(i);
     }
