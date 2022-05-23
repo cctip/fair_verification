@@ -52,7 +52,7 @@
                         <div class="content-box flex-middle">
                             <label for="uid">PID</label>
                             <input id="uid" type="text" v-model:value="uidValue" class="form-control"
-                                placeholder="Input PID">
+                                placeholder="Will be available after all tasks are done">
                         </div>
                         <v-warning v-show="isShowWarning&&!uidValue" text="Please enter a PID">
                         </v-warning>
@@ -114,7 +114,7 @@
                         <div class="content-box flex-middle">
                             <label for="server">PID</label>
                             <input id="server" type="number" v-model:value="myParticipantValue" class="form-control"
-                                placeholder="Input PID">
+                                placeholder="Will be available after all tasks are done">
                         </div>
                         <v-warning v-show="isShowWarning&&(myParticipantValue<0||myParticipantValue==='')"
                             text="Please enter your participation number">

@@ -15,7 +15,7 @@ const app = new Vue({
         ethHashValue: "",
         participantValue: 0,
         winnerValue: 0,
-        myParticipantValue: 0,
+        myParticipantValue: "",
         serverSeedHash: "",
         generate: false,
         stop: 10,
@@ -82,7 +82,6 @@ const app = new Vue({
 
 
             const arr = LotteryGroup(ethHashValue, serverValue, 0, (+participantValue - 1), winnerValue);
-            console.log(arr);
             let isWin = arr.includes(+myParticipantValue);
             this.renderView(renderGroupView, isWin);
             return false;
@@ -227,7 +226,7 @@ const app = new Vue({
                 ebh: "",
                 pa: 0,
                 wa: 0,
-                ypa: 0
+                ypa: ""
             };
             let search = window.location.search;
             if (!search) return params;
@@ -249,7 +248,7 @@ const app = new Vue({
             this.ethHashValue = params.ebh;
             this.participantValue = parseInt(params.pa) ? parseInt(params.pa) : 0;
             this.winnerValue = parseInt(params.wa) ? parseInt(params.wa) : 0;
-            this.myParticipantValue = parseInt(params.ypa) ? parseInt(params.ypa) : 0;
+            this.myParticipantValue = parseInt(params.ypa);
         },
     }
 })
