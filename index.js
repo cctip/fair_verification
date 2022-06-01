@@ -81,7 +81,8 @@ const app = new Vue({
             ]
 
 
-            const arr = LotteryGroup(ethHashValue, serverValue, 0, (+participantValue - 1), winnerValue);
+            const arr = notInstantDrawWinner(ethHashValue, serverValue, 0, +participantValue, winnerValue);
+            console.log("notInstant", arr);
             let isWin = arr.includes(+myParticipantValue);
             this.renderView(renderGroupView, isWin);
             return false;
@@ -138,7 +139,8 @@ const app = new Vue({
 
                 }
             ]
-            const isWin = winningResult(oddsValue / 100, `${clientValue}:${uidValue}`, serverValue);
+            const isWin = instantDrawWinner(oddsValue / 100, `${clientValue}:${uidValue}`, serverValue);
+            console.log("instant", isWin);
             this.renderView(renderSingleView, isWin);
             return false;
         },
