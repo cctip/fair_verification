@@ -54,8 +54,8 @@ class LCG {
 
 function CalculateWinnersV2(hash, min, max, winnerNum) {
   let res = [];
-  if (max < winnerNum) {
-    for (let i = min; i < max - 1; i++) {
+  if (max - min + 1 <= num) {
+    for (let i = min; i <= max; i++) {
       res.push(i);
     }
     return res;
