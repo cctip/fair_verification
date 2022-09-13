@@ -49,23 +49,33 @@ class LCG {
       .mod(this.modulus);
     return +this.seed.toNumber() % (max - min) + min;
   }
+  Shuffle = function (array) {
+    for (let n = array.length; n>0; n--) {
+      let r = this.IntN(0, n);
+      [array[r], array[n-1]] = [array[n-1], array[r]];
+    }
+  }
 }
 
 
 function CalculateWinnersV2(hash, min, max, winnerNum) {
-  let res = [];
-  if (max - min + 1 <= winnerNum) {
-    for (let i = min; i <= max; i++) {
-      res.push(i);
-    }
-    return res;
-  }
-  const sourceArr = Array.from(new Array((max)).keys())
   let d = new BigNumber(hash, 16).toFixed();
   let digit10NumberString = d.slice(0, 10);
   let di = parseInt(digit10NumberString);
   let lcg = new LCG(di);
 
+  if (max - min <= winnerNum) {
+    let res = [];
+    for (let i = min; i < max; i++) {
+      res.push(i);
+    }
+
+    lcg.Shuffle(res);
+    return res;
+  }
+
+  const sourceArr = Array.from(new Array((max)).keys())
+  console.log(sourceArr)
   for (let i = 0; i < winnerNum; i++) {
     let ri = lcg.IntN(i, sourceArr.length);
     [sourceArr[i], sourceArr[ri]] = [sourceArr[ri], sourceArr[i]]
