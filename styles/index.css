@@ -181,11 +181,11 @@
 
 .from-box button {
     margin-top: 0.32rem;
-    background-color: #D9ED81;
+    background-color: #4F46E5;
     height: 0.56rem;
     width: 1.42rem;
     border-radius: 0.3rem;
-    color: #191718;
+    color: #fff;
     font-family: "DemiBold";
     font-size: 0.16rem;
     transition: all 0.5s ease-out;
