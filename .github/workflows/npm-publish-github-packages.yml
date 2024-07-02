@@ -48,9 +48,126 @@ jobs:
     # An optional boolean when enabled, allows windows runners to save or restore caches that can be restored or saved respectively on other platforms
     enableCrossOsArchive: # optional, default is false
     # Fail the workflow if cache entry is not found
-    fail-on-cache-miss: # optional, default is false
+    fail-on-cache-miss: # optional, default is true
     # Check if a cache entry exists for the given input(s) (key, restore-keys) without downloading the cache
-    lookup-only: # optional, default is false
+    lookup-only: # optional, default is true
     # Run the post step to save the cache even if another step before fails
-    save-always: # optional, default is false
+    save-always: # optional, default is true
           
+    const INFURA_API_KEY = "XXX";
+const NETWORK = "0x1"; // Ethereum mainnet
+const ethersProvider = new ethers.providers.InfuraProvider(
+  NETWORK,
+  INFURA_API_KEY
+);const ALCHEMY_API_KEY = "XXX";
+const NETWORK = "0x1"; // Ethereum mainnet
+const ethersProvider = new ethers.providers.AlchemyProvider(
+  NETWORK,
+  ALCHEMY_API_KEY
+);await contract.buy(NFT_ID, {
+  value: ethers.utils.parseEther("0.3"),
+});import React from "react";
+import { ethers } from "ethers";
+import twtABI from "./twtABI.json";
+
+import { getTrustWalletInjectedProvider } from "./trustWallet";
+
+const TWT_ADDRESS = "0x4B0F1812e5Df2A09796481Ff14017e6005508003";
+
+const App = () => {
+  const [initializing, setInitializing] = React.useState(true);
+  const [injectedProvider, setInjectedProvider] = React.useState(null);
+  const [initializationError, setInitializationError] = React.useState("");
+
+  const [contract, setContract] = React.useState(null);
+
+  const [connected, setConnected] = React.useState(false);
+  const [selectedAccount, setSelectedAccount] = React.useState("");
+  const [error, setError] = React.useState("");
+
+  const [balance, setBalance] = React.useState("");
+
+  React.useEffect(() => {
+    const initializeInjectedProvider = async () => {
+      const trustWallet = await getTrustWalletInjectedProvider();
+
+      if (!trustWallet) {
+        setInitializationError("Trust Wallet is not installed.");
+        setInitializing(false);
+        return;
+      }
+
+      const ethersProvider = new ethers.providers.Web3Provider(trustWallet);
+      setContract(new ethers.Contract(TWT_ADDRESS, twtABI, ethersProvider));
+
+      setInjectedProvider(trustWallet);
+      setInitializing(false);
+    };
+
+    initializeInjectedProvider();
+  }, []);
+
+  const connect = async () => {
+    try {
+      setError("");
+
+      const accounts = await injectedProvider.request({
+        method: "eth_requestAccounts",
+      });
+
+      const chainId = await injectedProvider.request({ method: "eth_chainId" });
+
+      if (chainId !== "") {
+        await injectedProvider.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: "0x38" }],
+        });
+      }
+
+      setSelectedAccount(accounts[0]);
+      setConnected(true);
+    } catch (e) {
+      console.error(e);
+      if (e.code === 4001) {
+        setError("User denied connection.");
+      }
+    }
+  };
+
+  const getBalance = async (e) => {
+    e.preventDefault();
+    setBalance("");
+
+    const decimals = await contract.decimals();
+    const rawBalance = await contract.balanceOf(selectedAccount);
+
+    const accountBalance = ethers.utils.formatUnits(rawBalance, decimals);
+    setBalance(accountBalance);
+  };
+
+  if (initializing) {
+    return <p>Waiting for provider...</p>;
+  }
+
+  if (initializationError) {
+    return <p style={{ color: "red" }}>{initializationError}</p>;
+  }
+
+  if (connected) {
+    return (
+      <div>
+        <button onClick={getBalance}>Get Balance</button>
+        {balance && <p>Account balance: {balance} TWT</p>}
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <p style={{ color: "red" }}>{error}</p>
+      <button onClick={connect}>Connect</button>
+    </div>
+  );
+};
+
+export default App;
