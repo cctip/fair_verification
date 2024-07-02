@@ -33,7 +33,8 @@ jobs:
       - run: npm ci
       - run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}- name: Cache
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}-
+          name: Cache
   uses: actions/cache@v4.0.2
   with:
     # A list of files, directories, and wildcard patterns to cache and restore
