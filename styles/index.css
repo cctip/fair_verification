@@ -162,6 +162,16 @@
     font-size: 0.14rem;
 }
 
+.content-box .input-area {
+    width: 100%;
+    background-color: #F9F9FD;
+    border-radius: 0.08rem;
+    margin-bottom: 0.04rem;
+    padding: 0.12rem;
+    font-size: 0.14rem;
+    min-height:0.44rem;
+}
+
 .content-box .input-box {
     width: 100%;
     position: relative;
