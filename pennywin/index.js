@@ -30,11 +30,9 @@ const app = new Vue({
   },
   methods: {
     groupVerify: async function () {
-      var { timestamps, playerCount, blockHash: blockHashS } = this;
+      var { timestamps, playerCount, blockHash } = this;
       timestamps = timestamps.map((v) => Number(v.trim()));
       playerCount = Number(playerCount);
-      blockHashS = blockHashS.slice(-14);
-      var blockHash = Number(blockHashS);
 
       if (timestamps.length != 10) {
         this.timestampsError = "Requires 10 timestamps";
@@ -59,8 +57,16 @@ const app = new Vue({
         return;
       }
       this.playerCountError = "";
-      if (blockHashS.length != 14 || isNaN(blockHash)) {
-        this.blockHashError = "ETH Block Hash format is incorrect";
+
+      var blockHash10;
+      try {
+        blockHash10 = BigInt(blockHash).toString();
+      } catch (err) {
+        this.blockHashError = "Invalid input";
+        return;
+      }
+      if (blockHash10 <= 14) {
+        this.blockHashError = "Invalid input";
         return;
       }
       this.blockHashError = "";
@@ -91,8 +97,15 @@ const app = new Vue({
 
       generateInput(view, "> ETH block Hash");
       await this.generateValue(view, id++, this.blockHash);
+      generateLine(view);
+      var blockHash10 = BigInt(this.blockHash).toString();
+      var last14hash = blockHash10.slice(-14);
+      await this.generateValue(
+        view,
+        id++,
+        `The decimal format of block hash is :\n${blockHash10}\n the last 14 digist number is :${last14hash}`
+      );
 
-      const last14hash = this.blockHash.trim().slice(-14);
       generateInput(view, "> Number of Participants");
       await this.generateValue(view, id++, this.playerCount);
       generateLine(view);
@@ -148,7 +161,6 @@ const app = new Vue({
       this.timestamps = u.searchParams.getAll("timestamp") || [];
       this.blockHash = u.searchParams.get("blockHash") || "";
       this.playerCount = u.searchParams.get("playerCount") || "";
-      console.log("dddd", this.timestamps);
     },
   },
 });
