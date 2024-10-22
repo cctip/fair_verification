@@ -15,12 +15,15 @@ const app = new Vue({
     timestamps: [],
     playerCount: "",
     blockHash: "",
+    fixedNumber: "",
 
     timestampsError: "",
 
     playerCountError: "",
 
     blockHashError: "",
+
+    fixedNumberError: "",
 
     generate: false,
     lock: false,
@@ -70,6 +73,17 @@ const app = new Vue({
         return;
       }
       this.blockHashError = "";
+
+      if (this.fixedNumber.trim() == "") {
+        this.fixedNumberError = "Invalid input";
+        return;
+      }
+      var fixedNumber = Number(this.fixedNumber);
+      if (isNaN(fixedNumber)) {
+        this.fixedNumberError = "Invalid input";
+        return;
+      }
+      this.fixedNumberError = "";
       this.renderView();
     },
     renderView: async function () {
@@ -119,8 +133,12 @@ const app = new Vue({
         (sumTimeStamp + Number(last14hash)) % Number(this.playerCount);
       await this.generateValue(view, id++, randomNum);
       generateLine(view);
-      generateInput(view, `> Caculating winner number: 1001 + ${randomNum}`);
-      await this.generateValue(view, id++, 1001 + randomNum);
+      var fixedNumber = Number(this.fixedNumber);
+      generateInput(
+        view,
+        `> Caculating winner number: ${fixedNumber} + ${randomNum}`
+      );
+      await this.generateValue(view, id++, fixedNumber + randomNum);
       this.lock = false;
     },
     async generateValue(view, id, value) {
@@ -161,6 +179,7 @@ const app = new Vue({
       this.timestamps = u.searchParams.getAll("timestamp") || [];
       this.blockHash = u.searchParams.get("blockHash") || "";
       this.playerCount = u.searchParams.get("playerCount") || "";
+      this.fixedNumber = u.searchParams.get("fixedNumber") || "";
     },
   },
 });

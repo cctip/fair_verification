@@ -61,6 +61,16 @@
                             v-text="playerCountError">
                         </v-warning>
                     </div>
+
+                    <div class="from-item">
+                        <div class="content-box flex-middle">
+                            <label for="fixedNumber">Fix Number</label>
+                            <input id="fixedNumber" type="number" v-model:value="fixedNumber" class="form-control"
+                                placeholder="Input Fix Number">
+                        </div>
+                        <v-warning v-show="fixedNumberError" v-text="fixedNumberError">
+                        </v-warning>
+                    </div>
                     <button type="button" v-on:click="groupVerify">Verify</button>
                 </form>
             </div>
