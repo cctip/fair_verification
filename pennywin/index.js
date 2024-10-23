@@ -109,7 +109,7 @@ const app = new Vue({
         "Sum of timestamp is: " + sumTimeStamp
       );
 
-      generateInput(view, "> ETH block Hash");
+      generateInput(view, "> Block Hash");
       await this.generateValue(view, id++, this.blockHash);
       generateLine(view);
       var blockHash10 = BigInt(this.blockHash).toString();
