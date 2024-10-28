@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width"
+        name="viewport">
+    <title>Provably Fair</title>
+    <link rel="stylesheet" href="../styles/index.css">
+    <script src="../js/vue.js"></script>
+    <script src="../js/crypto-js/crypto-js.js" async></script>
+    <script src="../js/bignumber.js"></script>
+    <script src="../js/decimal.js"></script>
+    <script src="../js/fair_verification.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <div class="wrap">
+            <div class="header flex-middle">
+                <h1>Provably Fair</h1>
+                <h2>Pennywin verification</h2>
+                <div>BLOCKCHIAN BASED</div>
+            </div>
+            <div class="content">
+                <div class="view-box">
+                    <h2 v-show="!generate" style="margin-bottom: 0;">> Waiting for input<i>_</i></h2>
+                    <div v-show="generate" id="view"></div>
+                </div>
+                <form class="from-box flex-middle">
+                    <div class="from-item">
+                        <div class="content-box flex-middle">
+                            <label for="Timestamps">Timestamps</label>
+                            <textarea contenteditable="true" id="Timestamps" type="text" 
+                                v-text="timestamps.join(',')" 
+                                class="form-control input-area"
+                                @input="timestamps=$event.target.value.split(',')"
+                                placeholder="Input Timestamps" >
+                            </textarea>
+                        </div>
+                        <v-warning v-show="timestampsError" v-text="timestampsError">
+                        </v-warning>
+                    </div>
+                    <div class="from-item">
+                        <div class="content-box flex-middle">
+                            <label for="blockHash">Block Hash</label>
+                            <input id="blockHash" type="text" v-model:value="blockHash" class="form-control"
+                                placeholder="Input BlockHash">
+                        </div>
+                        <v-warning v-show="blockHashError" v-text="blockHashError">
+                        </v-warning>
+                    </div>
+                    <div class="from-item">
+                        <div class="content-box flex-middle">
+                            <label for="playerCount">Number of Participants</label>
+                            <input id="playerCount" type="number" v-model:value="playerCount" class="form-control"
+                                placeholder="Input number of participants">
+                        </div>
+                        <v-warning v-show="playerCountError"
+                            v-text="playerCountError">
+                        </v-warning>
+                    </div>
+
+                    <div class="from-item">
+                        <div class="content-box flex-middle">
+                            <label for="fixedNumber">Fix Number</label>
+                            <input id="fixedNumber" type="number" v-model:value="fixedNumber" class="form-control"
+                                placeholder="Input Fix Number">
+                        </div>
+                        <v-warning v-show="fixedNumberError" v-text="fixedNumberError">
+                        </v-warning>
+                    </div>
+                    <button type="button" v-on:click="groupVerify">Verify</button>
+                </form>
+            </div>
+            <div class="footer flex-middle">
+                <p>Open source & Custodial on</p>
+                <a href="https://github.com/cctip/fair_verification" target="_blank">
+                    <img src="../assets/images/github.png" alt="github">
+                </a>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script src="./index.js"></script>
+
+</html>
